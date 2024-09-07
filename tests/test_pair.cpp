@@ -5,6 +5,4 @@
 
 #define EPSILON 0.000001
 
-TEST(TestPair, can_div) {
-
-}
+TEST(TestPair, can_div) {}

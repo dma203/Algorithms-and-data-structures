@@ -10,6 +10,7 @@ float division(int a, int b);
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <utility>
 
 template <class T1, class T2> class TPair;
 template <class T1, class T2>
@@ -19,10 +20,12 @@ template <class T1, class T2>
 class TPair {
     T1 _first;
     T2 _second;
-public:
+ public:
     TPair() : _first(NULL), _second(NULL) { }
-    TPair(const T1& first, const T2& second) : _first(first), _second(second) { }
-    TPair(const TPair& pair) : _first(pair._first), _second(pair._second) { }
+    TPair(const T1& first, const T2& second) : 
+        _first(first), _second(second) { }
+    TPair(const TPair& pair) :
+        _first(pair._first), _second(pair._second) { }
     ~TPair() { }
 
     inline T1 first() const noexcept;
@@ -34,5 +37,6 @@ public:
 
     std::string to_string() const noexcept;
     void swap(TPair& other) noexcept;
+
     friend std::ostream& operator<<<T1, T2>(std::ostream& out, const TPair<T1, T2>& pair) noexcept;
 };
