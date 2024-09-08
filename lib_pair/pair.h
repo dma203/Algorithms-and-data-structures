@@ -16,7 +16,7 @@ class TPair {
     T1 _first;
     T2 _second;
 
-public:
+ public:
     TPair() : _first(NULL), _second(NULL) { }
     TPair(const T1& first, const T2& second)
         : _first(first), _second(second) { }
@@ -104,8 +104,7 @@ template <class T1, class T2>
 bool TPair<T1, T2>::operator==(const TPair& pair) const noexcept {
     if (_first != pair._first) {
         return false;
-    }
-    else if (_second != pair._second) { return false; }
+    } else if (_second != pair._second) { return false; }
     return true;
 }
 
