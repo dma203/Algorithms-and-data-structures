@@ -1,5 +1,7 @@
-#ifndef LIB_PAIR_LIB_PAIR_HEDER_H_
-#define LIB_PAIR_LIB_PAIR_HEDER_H_
+// Copyright 2024 Matvey Demidovich
+
+#ifndef LIB_PAIR_PAIR_H_
+#define LIB_PAIR_PAIR_H_
 
 #include <iostream>
 #include <string>
@@ -131,4 +133,4 @@ std::ostream& operator<< <T1, T2>
     return out;
 }
 
-#endif  // LIB_PAIR_LIB_PAIR_HEDER_H_
+#endif  // LIB_PAIR_PAIR_H_
