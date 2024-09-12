@@ -5,103 +5,52 @@
 
 #define EPSILON 0.000001
 
-TEST(libPair, CanCreatedWithDifferentBaseTypes) {
-    TPair<int, int> ex(1, 12);
-    TPair<int, char> ex1(1, 'a');
-    TPair<int, double> ex2(1, 12.12);
-    TPair<int, bool> ex3(5, true);
-    TPair<char, char> ex4('a', 'b');
-    TPair<char, double> ex5('a', 3.14);
-    TPair<char, bool> ex6('a', true);
-    TPair<double, double> ex7(1.12, 3.14);
-    TPair<double, bool> ex8(1.12, false);
-    TPair<bool, bool> ex9(true, false);
+TEST(libPair, difftypetest) {
+    TPair<int, int> test(52, 34);
+    TPair<int, bool> test3(8, true);
+    TPair<int, char> test1(3, 'a');
+    TPair<char, double> test5('a', 3.14);
+    TPair<char, char> test4('a', 'b');
+    TPair<char, bool> test6('a', true);
+    TPair<int, double> test2(9, 1.64);
+    TPair<double, double> test7(1.12, 2.14);
+    TPair<double, bool> test8(3.90, false);
+    TPair<bool, bool> test9(true, false);
 
-    ASSERT_NO_THROW(ex, ex1, ex2, ex3, ex4, ex5, ex6, ex7, ex8, ex9);
+    ASSERT_NO_THROW(test, test1, test2, test3, test4, test5, test6, test7, test8, test9);
 }
 
-TEST(libPair, CheckingConstructorsFunc) {
-    TPair<int, int> ex;
-    TPair<int, int> ex1(1, 2);
-    TPair<int, int> ex2(ex1);
+TEST(libPair, constructorfunctest) {
+    TPair<int, int> test;
+    TPair<int, int> test1(2, 4);
+    TPair<int, int> test2(test1);
 
-    ASSERT_NO_THROW(ex, ex1, ex2);
+    ASSERT_NO_THROW(test, test1, test2);
 }
 
-TEST(libPair, CheckingCopyConstructorsFunc) {
-    TPair<int, int> ex(1, 2);
-    TPair<int, int> ex1(ex);
+TEST(libPair, getterstest) {
+    TPair<int, int> test(5, 2);
 
-    int actual_results[2] = { ex1.first(), ex1.second() };
+    int _first = test.first();
+    int _second = test.second();
 
-    EXPECT_EQ(actual_results[0], 1, actual_results[1], 2);
+    EXPECT_EQ(_first, 5, _second, 2);
 }
 
-TEST(libPair, CheckingGetters) {
-    TPair<int, int> ex(3, 5);
+TEST(libPair, setterstest) {
+    TPair<int, bool> test;
 
-    int _first = ex.first();
-    int _second = ex.second();
+    test.set_first(5);
+    test.set_second(true);
 
-    EXPECT_EQ(_first, 3, _second, 5);
+    EXPECT_EQ(test.first(), 5, test.second(), true);
 }
 
-TEST(libPair, CheckingSetters) {
-    TPair<int, int> ex;
+TEST(libPair, operatoreqtest) {
+    TPair<char, char> test;
+    TPair<char, char> test2('a', 'b');
 
-    ex.set_first(5);
-    ex.set_second(7);
+    test = test2;
 
-    EXPECT_EQ(ex.first(), 5, ex.second(), 7);
-}
-
-TEST(libPair, CheckingOperatorEqually) {
-    TPair<char, char> t;
-    TPair<char, char> ans('a', 'b');
-
-    t = ans;
-
-    EXPECT_EQ(t.first(), 'a', t.second(), 'b');
-}
-
-TEST(libPair, CheckingOperatorMinusIsEqualto) {
-    TPair<char, char> t('y', 'z');
-    TPair<char, char> t1('a', 'b');
-
-    t -= t1;
-
-    EXPECT_EQ(t.first(), '\x18', t.second(), '\x18');
-}
-TEST(libPair, CheckingOperatorPlus) {
-    TPair<double, double> f(1.5, 3.14);
-    TPair<double, double> _f(1.6, 4.86);
-    TPair<double, double> ans;
-
-    ans = f + _f;
-
-    EXPECT_EQ(ans.first(), 3.1, ans.second(), 8.0);
-}
-
-TEST(libPair, CheckingOperatorComparison) {
-    TPair<bool, bool> f;
-    TPair<bool, bool> _f(true, true);
-
-    EXPECT_EQ(f == _f, false);
-}
-
-TEST(libPair, CheckingOperatorMinus) {
-    TPair<int, int> f(2, 4);
-    TPair<int, int> _f(1, 3);
-    TPair<int, int> ans;
-
-    ans = f - _f;
-
-    EXPECT_EQ(ans.first(), 1, ans.second(), 1);
-}
-
-TEST(libPair, CheckingFunctionTo_string) {
-    TPair<int, int> t(12, 24);
-    std::string str = "(12, 24)";
-
-    EXPECT_EQ(t.to_string(), str);
+    EXPECT_EQ(test.first(), 'a', test.second(), 'b');
 }
