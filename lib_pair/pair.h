@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <utility>
 
 template <class T1, class T2> class TPair;
 
@@ -13,14 +14,14 @@ template <class T1, class T2>
 std::ostream& operator<<(std::ostream& out, const TPair<T1, T2>& obj) noexcept;
 
 template <class T1, class T2>
-std::istream& operator>>(std::istream& in, const TPair<T1,T2>& obj) noexcept;
+std::istream& operator>>(std::istream& in, const TPair<T1, T2>& obj) noexcept;
 
 template <class T1, class T2>
 class TPair {
     T1 _first;
     T2 _second;
 
-public:
+ public:
     TPair() : _first(NULL), _second(NULL) { }
     TPair(const T1& first, const T2& second)
         : _first(first), _second(second) { }
@@ -34,7 +35,7 @@ public:
 
     template <class T1, class T2>
     void changeWith(const TPair& t);
-    void swap(TPair& other) noexcept(noexcept(swap(first, other.first)) && 
+    void swap(TPair& other) noexcept(noexcept(swap(first, other.first)) &&
         noexcept(swap(second, other.second)));
 
     TPair& operator=(const TPair& pair) noexcept;

@@ -17,7 +17,8 @@ TEST(libPair, difftypetest) {
     TPair<double, bool> test8(3.90, false);
     TPair<bool, bool> test9(true, false);
 
-    ASSERT_NO_THROW(test, test1, test2, test3, test4, test5, test6, test7, test8, test9);
+    ASSERT_NO_THROW(test, test1, test2, test3,
+        test4, test5, test6, test7, test8, test9);
 }
 
 TEST(libPair, constructorfunctest) {
