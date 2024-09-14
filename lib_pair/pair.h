@@ -82,4 +82,11 @@ std::ostream& operator<< <T1, T2>
     return out;
 }
 
+template <class T1, class T2>
+std::istream& operator>> <T1, T2>\
+(std::istream& in, const TPair<T1, T2>& pair) noexcept {
+    in >> pair.set_first() >> pair.set_second();
+    return in;
+}
+
 #endif  // LIB_PAIR_PAIR_H_
