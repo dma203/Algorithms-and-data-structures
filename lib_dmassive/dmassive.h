@@ -3,4 +3,4 @@
 #ifndef LIB_DMASSIVE_DMASSIVE_H_
 #define LIB_DMASSIVE_DMASSIVE_H_
 
-#endif
+#endif  // LIB_DMASSIVE_DMASSIVE_H_
