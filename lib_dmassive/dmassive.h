@@ -27,10 +27,10 @@ class Dmassive {
     size_t _deleted;
  public:
     Dmassive();
-    // TArchive(const TArchive& archive);
-    // TArchive(const T* arr, size_t n);
-    // TArchive(size_t n, T value);
-    // TArchive(const TArchive& archive, size_t pos, size_t n);
+    Dmassive(const Dmassive& dmassive);
+    Dmassive(const T* arr, size_t n);
+    Dmassive(size_t n, T value);
+    Dmassive(const Dmassive& dmassive, size_t pos, size_t n);
 
     ~Dmassive();
 
@@ -39,38 +39,39 @@ class Dmassive {
     inline bool empty() const noexcept;
     inline bool full() const noexcept;
 
-    // size_t size();
-    // size_t capacity();
-    // const T* data();
+    size_t size();
+    size_t capacity();
+    const T* data();
 
-    // void swap(TArchive& archive);
-    // TArchive& assign(const TArchive& archive);
+    void swap(Dmassive& dmassive);
+    Dmassive& assign(const Dmassive& dmassive);
 
-    // void clear();
-    // void resize(size_t n, T value);
-    // void reserve(size_t n);
+    void clear();
+    void resize(size_t n, T value);
+    void reserve(size_t n);
+    void repack();
 
-    // void push_back(T value);
-    // void pop_back();
-    // void push_front(T value);
-    // void pop_front();
+    void push_back(T value);
+    void pop_back();
+    void push_front(T value);
+    void pop_front();
 
-    // TArchive& insert(const T* arr, size_t n, size_t pos);
+    Dmassive& insert(const T* arr, size_t n, size_t pos);
     Dmassive& insert(T value, size_t pos);
 
-    // TArchive& replace(size_t pos, T new_value);
+    Dmassive& replace(size_t pos, T new_value);
 
-    // TArchive& erase(size_t pos, size_t n);
-    // TArchive& remove_all(T value);
-    // TArchive& remove_first(T value);
-    // TArchive& remove_last(T value);
-    // TArchive& remove_by_index(size_t pos);
+    Dmassive& erase(size_t pos, size_t n);
+    Dmassive& remove_all(T value);
+    Dmassive& remove_first(T value);
+    Dmassive& remove_last(T value);
+    Dmassive& remove_by_index(size_t pos);
 
-    // size_t* find_all(T value) const noexcept;
-    // size_t find_first(T value);
-    // size_t find_last(T value);
+    size_t* find_all(T value) const noexcept;
+    size_t find_first(T value);
+    size_t find_last(T value);
  private:
-    // size_t count_value(T value);
+    size_t count_value(T value);
 };
 
 template <typename T>
@@ -126,9 +127,8 @@ void Dmassive<T>::print() const noexcept {
     }
 }
 
-/*
 template <typename T>
-size_t* TArchive<T>::find_all (T value) const noexcept {
+size_t* Dmassive<T>::find_all (T value) const noexcept {
     size_t count = this->count_value(value);
     if (count == 0) { return nullptr; }
     int* found_positions = new int[count + 1];
@@ -138,6 +138,5 @@ size_t* TArchive<T>::find_all (T value) const noexcept {
 
     return found_positions;
 }
-*/
 
 #endif  // LIB_DMASSIVE_DMASSIVE_H_
