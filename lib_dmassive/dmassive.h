@@ -1,11 +1,11 @@
-﻿//  Copyright 2024 Matvey Demidovich
+﻿// Copyright 2024 Matvey Demidovich
 
 #ifndef LIB_DMASSIVE_DMASSIVE_H_
 #define LIB_DMASSIVE_DMASSIVE_H_
 #pragma once
 #define STEP_CAPACITY 15
 
-#include <utility>  //for swap
+#include <utility>  // for swap
 
 enum State { empty, busy, deleted };
 
@@ -25,6 +25,7 @@ class Dmassive {
     size_t _capacity;
     size_t _size;
     size_t _deleted;
+
  public:
     Dmassive();
     Dmassive(const Dmassive& dmassive);
@@ -70,6 +71,7 @@ class Dmassive {
     size_t* find_all(T value) const noexcept;
     size_t find_first(T value);
     size_t find_last(T value);
+
  private:
     size_t count_value(T value);
 };
