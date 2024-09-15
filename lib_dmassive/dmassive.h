@@ -1,11 +1,11 @@
-﻿// Copyright 2024 Matvey Demidovich
+﻿//  Copyright 2024 Matvey Demidovich
 
 #ifndef LIB_DMASSIVE_DMASSIVE_H_
 #define LIB_DMASSIVE_DMASSIVE_H_
 #pragma once
 #define STEP_CAPACITY 15
 
-#include <utility> //for swap
+#include <utility>  //for swap
 
 enum State { empty, busy, deleted };
 
@@ -128,7 +128,7 @@ void Dmassive<T>::print() const noexcept {
 }
 
 template <typename T>
-size_t* Dmassive<T>::find_all (T value) const noexcept {
+size_t* Dmassive<T>::find_all(T value) const noexcept {
     size_t count = this->count_value(value);
     if (count == 0) { return nullptr; }
     int* found_positions = new int[count + 1];
