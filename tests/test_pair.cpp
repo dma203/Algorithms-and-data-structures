@@ -7,18 +7,9 @@
 
 TEST(libPair, difftypetest) {
     TPair<int, int> test(52, 34);
-    TPair<int, bool> test3(8, true);
-    TPair<int, char> test1(3, 'a');
-    TPair<char, double> test5('a', 3.14);
-    TPair<char, char> test4('a', 'b');
-    TPair<char, bool> test6('a', true);
-    TPair<int, double> test2(9, 1.64);
-    TPair<double, double> test7(1.12, 2.14);
-    TPair<double, bool> test8(3.90, false);
-    TPair<bool, bool> test9(true, false);
 
-    ASSERT_NO_THROW(test, test1, test2, test3,
-        test4, test5, test6, test7, test8, test9);
+    EXPECT_EQ(test.first(), 52);
+    EXPECT_EQ(test.second(), 34);
 }
 
 TEST(libPair, constructorfunctest) {
@@ -29,22 +20,36 @@ TEST(libPair, constructorfunctest) {
     ASSERT_NO_THROW(test, test1, test2);
 }
 
-TEST(libPair, getterstest) {
+TEST(libPair, gettfirsttest) {
     TPair<int, int> test(5, 2);
 
     int _first = test.first();
-    int _second = test.second();
 
-    EXPECT_EQ(_first, 5, _second, 2);
+    EXPECT_EQ(_first, 5);
 }
 
-TEST(libPair, setterstest) {
+TEST(libPair, gettsecondtest) {
+    TPair<bool, int> test(true, 2);
+
+    int _second = test.second();
+
+    EXPECT_EQ(_second, 2);
+}
+
+TEST(libPair, settfirsttest) {
     TPair<int, bool> test;
 
     test.set_first(5);
+
+    EXPECT_EQ(test.first(), 5);
+}
+
+TEST(libPair, settsecondtest) {
+    TPair<int, bool> test;
+
     test.set_second(true);
 
-    EXPECT_EQ(test.first(), 5, test.second(), true);
+    EXPECT_EQ(test.second(), true);
 }
 
 TEST(libPair, operatoreqtest) {
@@ -53,5 +58,7 @@ TEST(libPair, operatoreqtest) {
 
     test = test2;
 
-    EXPECT_EQ(test.first(), 'a', test.second(), 'b');
+    EXPECT_EQ(test.second(), 'b');
+    EXPECT_EQ(test.first(), 'a');
+
 }

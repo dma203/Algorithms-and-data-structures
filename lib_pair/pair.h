@@ -78,14 +78,14 @@ TPair<T1, T2>& TPair<T1, T2>::operator=(const TPair<T1, T2>& pair) noexcept {
 template <class T1, class T2>
 std::ostream& operator<< <T1, T2>
 (std::ostream& out, const TPair<T1, T2>& pair) noexcept {
-    out << pair.to_string();
+    out << pair._first pair._second;
     return out;
 }
 
 template <class T1, class T2>
 std::istream& operator>> <T1, T2>\
 (std::istream& in, const TPair<T1, T2>& pair) noexcept {
-    in >> pair.set_first() >> pair.set_second();
+    in >> pair._first >> pair._second;
     return in;
 }
 
