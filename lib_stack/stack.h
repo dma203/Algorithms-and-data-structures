@@ -16,6 +16,7 @@ public:
 	void push(T val);
 	bool isEmpty() const noexcept;
 	void pop();
+	T top();
 };
 
 template<class T>
@@ -60,7 +61,7 @@ inline bool TStack<T>::isEmpty() const noexcept
 }
 
 template<class T>
-inline void TStack<T>::pop()
+void TStack<T>::pop()
 {
 	if (isEmpty()) {
 		throw;
@@ -68,5 +69,13 @@ inline void TStack<T>::pop()
 	_top = _top - 1;
 }
 
+template<class T>
+inline T TStack<T>::top()
+{
+	if (isEmpty()) {
+		throw std::logic_error("...");
+	}
+	return _data[_top];
+}
 
 #endif  // LIB_STACK_H_
