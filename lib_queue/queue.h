@@ -1,39 +1,41 @@
 // Copyright 2024 Matvey Demidovich
 
-#ifndef LIB_STACK_H_
-#define LIB_STACK_H_
+#ifndef LIB_QUEUE_H_
+#define LIB_QUEUE_H_
 
 template<class T>
-class Stack {
+class Queue {
 	T* _data;
 	size_t _size;
 	size_t _top;
 public:
-	Stack(size_t size = 20);
-	~Stack();
+	Queue(size_t size = 20);
+	~Queue();
 
 	bool isFull() const noexcept;
 	void push(T val);
 	bool isEmpty() const noexcept;
 	void pop();
 	T top();
+	T front();
 };
 
 template<class T>
-Stack<T>::Stack(size_t size = 20) {
+Queue<T>::Queue(size_t size = 20) {
 	_size = size;
 	_data = new T[size];
 	_top = -1;
+	_front = -1;
 }
 
 template<class T>
-Stack<T>::~Stack() {
+Queue<T>::~Queue() {
 	delete[] _data;
 	_data = nullptr;
 }
 
 template<class T>
-inline bool Stack<T>::isFull() const noexcept
+inline bool Queue<T>::isFull() const noexcept
 {
 	if (_top == _size - 1) {
 		return true;
@@ -42,17 +44,21 @@ inline bool Stack<T>::isFull() const noexcept
 }
 
 template<class T>
-inline void Stack<T>::push(T val)
+inline void Queue<T>::push(T val)
 {
 	if (isFull()) {
 		throw;
+	}
+	if (isEmpty()) {
+		_front += 1;
+		_data[_front] = val;
 	}
 	_top += 1;
 	_data[_top] = val;
 }
 
 template<class T>
-inline bool Stack<T>::isEmpty() const noexcept
+inline bool Queue<T>::isEmpty() const noexcept
 {
 	if (_top == -1) {
 		return true;
@@ -61,7 +67,7 @@ inline bool Stack<T>::isEmpty() const noexcept
 }
 
 template<class T>
-void Stack<T>::pop()
+void Queue<T>::pop()
 {
 	if (isEmpty()) {
 		throw;
@@ -70,7 +76,7 @@ void Stack<T>::pop()
 }
 
 template<class T>
-inline T Stack<T>::top()
+inline T Queue<T>::top()
 {
 	if (isEmpty()) {
 		throw std::logic_error("...");
@@ -78,4 +84,13 @@ inline T Stack<T>::top()
 	return _data[_top];
 }
 
-#endif  // LIB_STACK_H_
+template<class T>
+inline T Queue<T>::front()
+{
+	if (isEmpty()) {
+		throw std::logic_error("...");
+	}
+	return _data[_front];
+}
+
+#endif  // LIB_QUEUE_H_

@@ -7,7 +7,7 @@
 
 bool _is_correct(const std::string exp){
 
-	TStack<char> stack(exp.length());
+	Stack<char> stack(exp.length());
 	char bracket;
 
 	for (size_t i = 0; i < exp.length(); i++) {

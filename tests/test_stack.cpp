@@ -4,23 +4,23 @@
 #include "../lib_stack/stack.h"
 
 TEST(libstack, constructorbydeftest) {
-	ASSERT_NO_THROW(TStack<int> test);
+	ASSERT_NO_THROW(Stack<int> test);
 }
 
 TEST(libstack, isNotFulltest) {
-	TStack<int> test;
+	Stack<int> test;
 	ASSERT_FALSE(test.isFull());
 }
 
 TEST(libstack, isFulltest) {
-	TStack<int> test;
+	Stack<int> test;
 	for (int i = 0; i < 20; i++)
 	test.push(i);
 	ASSERT_TRUE(test.isFull());
 }
 
 TEST(libstack, pushtest) {
-	TStack<int> test;
+	Stack<int> test;
 
 	test.push(2);
 	test.push(4);
@@ -31,13 +31,13 @@ TEST(libstack, pushtest) {
 }
 
 TEST(libstack, isEmptytest) {
-	TStack<int> test;
+	Stack<int> test;
 	
 	ASSERT_TRUE(test.isEmpty());
 }
 
 TEST(libstack, poptest) {
-	TStack<int> test;
+	Stack<int> test;
 
 	test.push(5);
 
