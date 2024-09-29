@@ -72,7 +72,7 @@ void Queue<T>::pop()
 	if (isEmpty()) {
 		throw;
 	}
-	_top = _top - 1;
+	_front = _front - 1;
 }
 
 template<class T>
