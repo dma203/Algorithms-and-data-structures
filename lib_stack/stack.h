@@ -35,8 +35,9 @@ Stack<T>::~Stack() {
 template<class T>
 inline bool Stack<T>::isFull() const noexcept
 {
-	if (_top == _size - 1) {
-		return true;
+	if (_top == _size - 1) 
+	{
+        return true;
 	}
 	return false;
 }
@@ -44,7 +45,8 @@ inline bool Stack<T>::isFull() const noexcept
 template<class T>
 inline void Stack<T>::push(T val)
 {
-	if (isFull()) {
+	if (isFull()) 
+	{
 		throw;
 	}
 	_top += 1;
@@ -54,7 +56,8 @@ inline void Stack<T>::push(T val)
 template<class T>
 inline bool Stack<T>::isEmpty() const noexcept
 {
-	if (_top == -1) {
+	if (_top == -1) 
+	{
 		return true;
 	}
 	return false;
@@ -63,7 +66,8 @@ inline bool Stack<T>::isEmpty() const noexcept
 template<class T>
 void Stack<T>::pop()
 {
-	if (isEmpty()) {
+	if (isEmpty()) 
+	{
 		throw;
 	}
 	_top = _top - 1;
@@ -72,10 +76,11 @@ void Stack<T>::pop()
 template<class T>
 inline T Stack<T>::top()
 {
-	if (isEmpty()) {
+	if (isEmpty()) 
+	{
 		throw std::logic_error("...");
 	}
 	return _data[_top];
 }
 
-#endif  // LIB_STACK_H_
+#endif  // LIB_STACK_STACK_H_

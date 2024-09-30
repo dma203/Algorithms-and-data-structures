@@ -93,4 +93,4 @@ inline T Queue<T>::front()
 	return _data[_front];
 }
 
-#endif  // LIB_QUEUE_H_
+#endif  // LIB_QUEUE_QUEUE_H_
