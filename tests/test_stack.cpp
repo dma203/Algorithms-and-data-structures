@@ -43,3 +43,23 @@ TEST(libstack, poptest) {
 
 	ASSERT_NO_THROW(test.pop());
 }
+
+TEST(libstack, topThrowtest) {
+	Stack<int> test;
+
+	ASSERT_ANY_THROW(test.top());
+}
+
+TEST(libstack, isPushFulltest1) {
+	Stack<int> test;
+	for (int i = 0; i < 20; i++)
+		test.push(i);
+	ASSERT_ANY_THROW(test.push(1));
+}
+
+TEST(libstack, isnotEmptytest1) {
+	Stack<int> test;
+	test.push(1);
+
+	ASSERT_FALSE(test.isEmpty());
+}

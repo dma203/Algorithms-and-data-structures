@@ -47,7 +47,7 @@ inline void Stack<T>::push(T val)
 {
 	if (isFull()) 
 	{
-		throw;
+		throw std::logic_error("...");
 	}
 	_top += 1;
 	_data[_top] = val;
@@ -68,7 +68,7 @@ void Stack<T>::pop()
 {
 	if (isEmpty()) 
 	{
-		throw;
+		throw std::logic_error("...");
 	}
 	_top = _top - 1;
 }
