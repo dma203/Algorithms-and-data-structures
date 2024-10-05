@@ -68,7 +68,7 @@ void Stack<T>::pop()
 {
 	if (isEmpty()) 
 	{
-		throw std::logic_error("...");
+		throw std::logic_error("Stack is empty can not use pop");
 	}
 	_top = _top - 1;
 }
@@ -78,7 +78,7 @@ inline T Stack<T>::top()
 {
 	if (isEmpty()) 
 	{
-		throw std::logic_error("...");
+		throw std::logic_error("Stack is empty can not use top");
 	}
 	return _data[_top];
 }
