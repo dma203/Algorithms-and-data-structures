@@ -58,11 +58,20 @@ template<class T>
 void Queue<T>::push(T val)
 {
 	if (isFull()) {
-		throw std::logic_error("...");
+		throw std::logic_error("Queue is full");
 	}
 	if (isEmpty()) {
 		_front += 1;
+		_top += 1;
 		_data[_front] = val;
+	}
+	else if (_front > _top) {
+		_data[_top] = val;
+		_top = (_top + 1) % (_size - _front + _top);
+	}
+	else if (_front < _top) {
+		_data[_top] = val;
+		_top = (_top + 1) % (_top - _front);
 	}
 		_data[_top] = val;
 		_top = (_top + 1) % _q_size;
@@ -82,8 +91,9 @@ template<class T>
 void Queue<T>::pop()
 {
 	if (isEmpty()) {
-		throw std::logic_error("...");
+		throw std::logic_error("Queue is empty");
 	}
+	_data[_front] = 0;
 	_front = (_front + 1) % _q_size;
 }
 
@@ -91,7 +101,7 @@ template<class T>
 inline T Queue<T>::top()
 {
 	if (isEmpty()) {
-		throw std::logic_error("...");
+		throw std::logic_error("Queue is empty");
 	}
 	return _data[_top - 1];
 }
@@ -100,7 +110,7 @@ template<class T>
 inline T Queue<T>::front()
 {
 	if (isEmpty()) {
-		throw std::logic_error("...");
+		throw std::logic_error("Queue is empty");
 	}
 	return _data[_front];
 }

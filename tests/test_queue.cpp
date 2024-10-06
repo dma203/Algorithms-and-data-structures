@@ -40,8 +40,9 @@ TEST(libQueue, poptest) {
 	Queue<int> test;
 
 	test.push(5);
+	test.pop();
 
-	ASSERT_NO_THROW(test.pop());
+	ASSERT_TRUE(test.isEmpty());
 }
 
 TEST(libQueue, topThrowtest) {
@@ -82,4 +83,12 @@ TEST(libQueue, q_sizeisnotFulltest) {
 	for (int i = 0; i < 15; i++)
 		test.push(i);
 	ASSERT_TRUE(test.q_size(), 5);
+}
+
+TEST(libQueue, PullbeforePoptest) {
+	Queue<int> test;
+	for (int i = 0; i < 20; i++){ test.push(i); }
+	test.pop();
+	
+	ASSERT_NO_THROW(test.push(2));
 }
