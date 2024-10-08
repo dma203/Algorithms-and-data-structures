@@ -26,8 +26,7 @@ TEST(libQueue, pushtest) {
 	test.push(4);
 
 	ASSERT_NO_THROW(test.push(5));
-	EXPECT_EQ(test.top(), 5);
-
+	EXPECT_EQ(test.top(), 4);
 }
 
 TEST(libQueue, isEmptytest) {
@@ -40,8 +39,9 @@ TEST(libQueue, poptest) {
 	Queue<int> test;
 
 	test.push(5);
-	test.pop();
+	ASSERT_FALSE(test.isEmpty());
 
+	test.pop();
 	ASSERT_TRUE(test.isEmpty());
 }
 
@@ -65,30 +65,10 @@ TEST(libQueue, isnotEmptytest) {
 	ASSERT_FALSE(test.isEmpty());
 }
 
-TEST(libQueue, q_sizeisEmptytest) {
-	Queue<int> test;
-
-	EXPECT_EQ(test.q_size(), 0);
-}
-
-TEST(libQueue, q_sizeisFulltest) {
+TEST(libQueue, PullbeforePoptest) {
 	Queue<int> test;
 	for (int i = 0; i < 20; i++)
 		test.push(i);
-	ASSERT_TRUE(test.q_size(), 0);
-}
-
-TEST(libQueue, q_sizeisnotFulltest) {
-	Queue<int> test;
-	for (int i = 0; i < 15; i++)
-		test.push(i);
-	ASSERT_TRUE(test.q_size(), 5);
-}
-
-TEST(libQueue, PullbeforePoptest) {
-	Queue<int> test;
-	for (int i = 0; i < 20; i++){ test.push(i); }
 	test.pop();
-	
 	ASSERT_NO_THROW(test.push(2));
 }

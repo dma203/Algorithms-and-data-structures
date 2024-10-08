@@ -9,13 +9,11 @@ class Queue {
 	size_t _size;
 	size_t _top;
 	size_t _front;
-	size_t _q_size;
 public:
 	Queue(size_t size = 20);
 	~Queue();
 
 	bool isFull() const noexcept;
-	int q_size();
 	void push(T val);
 	bool isEmpty() const noexcept;
 	void pop();
@@ -27,8 +25,8 @@ template<class T>
 Queue<T>::Queue(size_t size = 20) {
 	_size = size;
 	_data = new T[size];
-	_top = 0;
-	_front = 0;
+	_top = -1;
+	_front = -1;
 }
 
 template<class T>
@@ -40,19 +38,24 @@ Queue<T>::~Queue() {
 template<class T>
 inline bool Queue<T>::isFull() const noexcept
 {
-	if (_top == _size) {
+	if (_front == 0 && _top == _size - 1) {
+		return true;
+	}
+	if (_front == _top + 1) {
 		return true;
 	}
 	return false;
 }
 
 template<class T>
-inline int Queue<T>::q_size() {
-	if (_front > _top)
-		return _q_size = _size - _front + _top;
-	else
-		return _q_size = _top - _front;
+inline bool Queue<T>::isEmpty() const noexcept
+{
+	if (_front == -1) {
+		return true;
+	}
+	return false;
 }
+
 
 template<class T>
 void Queue<T>::push(T val)
@@ -60,31 +63,12 @@ void Queue<T>::push(T val)
 	if (isFull()) {
 		throw std::logic_error("Queue is full");
 	}
-	if (isEmpty()) {
-		_front += 1;
-		_top += 1;
-		_data[_front] = val;
+	else if (isEmpty()) {
+		_front = 0;
 	}
-	else if (_front > _top) {
+		_top = (_top + 1) % _size;
 		_data[_top] = val;
-		_top = (_top + 1) % (_size - _front + _top);
-	}
-	else if (_front < _top) {
-		_data[_top] = val;
-		_top = (_top + 1) % (_top - _front);
-	}
-		_data[_top] = val;
-		_top = (_top + 1) % _q_size;
 
-}
-
-template<class T>
-inline bool Queue<T>::isEmpty() const noexcept
-{
-	if (_top == 0) {
-		return true;
-	}
-	return false;
 }
 
 template<class T>
@@ -93,8 +77,16 @@ void Queue<T>::pop()
 	if (isEmpty()) {
 		throw std::logic_error("Queue is empty");
 	}
-	_data[_front] = 0;
-	_front = (_front + 1) % _q_size;
+	else {
+		//val = _data[_front];
+		if (_front == _top) {
+			_front = -1;
+			_top = -1;
+		}
+		else {
+			_front = (_front + 1) % _size;
+		}
+	}
 }
 
 template<class T>
