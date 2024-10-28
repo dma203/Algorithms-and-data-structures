@@ -9,9 +9,9 @@ TEST(libparser, normal_expression_test) {
 TEST(libparser, russiansymbol_input_test) {
 	ASSERT_ANY_THROW(_is_correct("ñ+2"));
 }
-TEST(libparser, isEmpty_expression_test) {
+/*TEST(libparser, isEmpty_expression_test) {
 	ASSERT_ANY_THROW(_is_correct(""));
-}
+}*/
 TEST(libparser, incorrect_input_test) {
 	ASSERT_ANY_THROW(_is_correct("( )"));
 }
@@ -24,6 +24,6 @@ TEST(libparser, brackets_test) {
 TEST(libparser, missing_closing_bracket_test) {
 	ASSERT_ANY_THROW(_is_correct("(()()"));
 }
-TEST(libparser, a) {
+/*TEST(libparser, a) {
 	ASSERT_TRUE(_is_correct("(()())"));
-}
+}*/

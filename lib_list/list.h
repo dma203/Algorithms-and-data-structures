@@ -4,7 +4,7 @@
 #define LIB_LIST_H_
 
 #include <stdexcept>
-//Реализация узла
+// Реализация узла.
 template<class T>
 struct Node {
     T val;
@@ -12,105 +12,116 @@ struct Node {
 
     Node(T _val) : val(_val), next(nullptr) {}
 };
-//Реализация списка
+// Реализация списка.
 template<class T>
 class List {
     Node<T>* _first;
     Node<T>* _last;
+    int _size;
 
 public:
     List();
     ~List();
-    bool is_empty() noexcept; /*Функция проверки наличия узлов в списке*/
-    void push_back(const T& _val) noexcept; /*Функция добавления элемента в конец списка*/
-    void push_front(const T& _val) noexcept; /*Функция добавления элемента в начало списка*/
-    void insert(int pos, const T& _val) noexcept;
-    Node<T>* find(const T& _val); /*Функция поиска узла в списке по заданному значению*/
-    void remove_first() noexcept; /*Функция удаления первого узла*/
-    void remove_last() noexcept; /*Функция удаления последнего узла*/
-    void remove(T _val) noexcept; /*Функция удаления узла по заданному значению*/
-    Node<T>* operator[](const int index);
+    
+    /* Функция проверки наличия узлов в списке. */
+    bool empty() noexcept;
+    /** Функция получения количества элементов в списке. */
+    int size() noexcept;
+    /* Функция получения значения первого элемента списка. */
+    T front();
+    /* Функция получения значения последнего элемента списка. */
+    T back();
+    /* Функция добавления элемента в конец списка. */
+    void push_back(const T& _val) noexcept;
+    /* Функция добавления элемента в начало списка. */
+    void push_front(const T& _val) noexcept;
+    /* Функция удаления последнего узла. */
+    void pop_back() noexcept;
+    /* Функция удаления первого узла. */
+    void pop_front() noexcept;
+    /* Функция поиска узла в списке по заданному значению. */
+    Node<T>* find(const T& _val);
+    /* Функция добавления элемента на позицию. */
+    Node<T>* insert(int pos, const T& _val) noexcept;    
+    /* Функция удаления узла по заданному значению. */
+    void remove(const T& _val) noexcept;
 };
 
 template<class T>
 List<T>::List() {
     _first = nullptr;
     _last = nullptr;
+    _size = 0;
 }
 
 template<class T>
-bool List<T>::is_empty() noexcept {
-    return _first == nullptr;
-}
-template<class T>
 List<T>::~List() {
+    while (!empty()) {
+        pop_front();
+    }
     _first = nullptr;
     _last = nullptr;
 }
+
 template<class T>
-void List<T>::push_back(const T& _val) noexcept {
-    Node<T>* p = new Node<T>(_val);
-    if (is_empty()) {
-        _first = p;
-        _last = p;
-        return;
-    }
-    _last->next = p;
-    _last = p;
-}
-template<class T>
-void List<T>::push_front(const T& _val) noexcept{
-    Node<T>* p = new Node<T>(_val);
-    if (is_empty()) {
-        _first = p;
-        _last = p;
-        return;
-    }
-    p->next = _first;
-    _first = p;
+bool List<T>::empty() noexcept {
+    return _size == 0;
 }
 
 template<class T>
-void List<T>::insert(int pos, const T& _val) noexcept {
+int List<T>::size() noexcept {
+    return _size;
+}
+
+template<class T>
+T List<T>::front() {
+    if (empty()) {
+        return T();
+    }
+    return _first->val;
+}
+
+template<class T>
+T List<T>::back() {
+    if (empty()) {
+        return T();
+    }
+    return _last->val;
+}
+
+template<class T>
+void List<T>::push_back(const T& _val) noexcept {
     Node<T>* p = new Node<T>(_val);
-    if (is_empty()) {
+    if (empty()) {
         _first = p;
         _last = p;
-        return;
-    }
-    Node<T>* nextnode = _first;
-    for (int i = 0; i != pos;) {
-       nextnode = nextnode->next;
-       i++;
-    }
-    if (nextnode == nullptr) {
-        _last->next = p;
-        p = _last;
     }
     else {
-        p->next = nextnode->next;
-        nextnode->next = p;
+        _last->next = p;
+        _last = p;
     }
-    
+    _size += 1;
 }
+
 template<class T>
-Node<T>* List<T>::find(const T& _val) {
-    Node<T>* p = _first;
-    while (p && p->val != _val) p = p->next;
-    return (p && p->val == _val) ? p : nullptr;
+void List<T>::push_front(const T& _val) noexcept{
+    Node<T>* p = new Node<T>(_val);
+    if (empty()) {
+        _first = p;
+        _last = p;
+    }
+    else {
+        p->next = _first;
+        _first = p;
+    }
+    _size += 1;
 }
+
 template<class T>
-void  List<T>::remove_first() noexcept {
-    if (is_empty()) return;
-    Node<T>* p = _first;
-    _first = p->next;
-    delete p;
-}
-template<class T>
-void  List<T>::remove_last() noexcept {
-    if (is_empty()) return;
+void  List<T>::pop_back() noexcept {
+    if (empty()) return;
     if (_first == _last) {
-        remove_first();
+        pop_front();
         return;
     }
     Node<T>* p = _first;
@@ -118,16 +129,68 @@ void  List<T>::remove_last() noexcept {
     p->next = nullptr;
     delete _last;
     _last = p;
+    _size -= 1;
 }
+
 template<class T>
-void  List<T>::remove(T _val) noexcept {
-    if (is_empty()) return;
+void  List<T>::pop_front() noexcept {
+    if (empty()) return;
+    Node<T>* p = _first;
+    _first = p->next;
+    delete p;
+    _size -= 1;
+}
+
+template<class T>
+Node<T>* List<T>::insert(int pos, const T& _val) noexcept {
+    Node<T>* p = new Node<T>(_val);
+    if (empty()) {
+        _first = p;
+        _last = p;
+    }
+    else if (pos < 1) {
+        p->next = _first;
+        _first = p;
+    }
+    else {
+        if (pos > _size) {
+            pos = _size;
+        }
+        Node<T>* curr = _first;
+        for (int i = 1; i < pos; i++) {
+            curr = curr->next;
+        }
+        p->next = curr->next;
+        curr->next = p;
+        if (p->next == nullptr) {
+            _last = p;
+        }
+    }
+    _size += 1;
+    return p;
+}
+
+template<class T>
+Node<T>* List<T>::find(const T& _val) {
+    Node<T>* p = _first;
+    while (p && p->val != _val) {
+        p = p->next;
+    }
+    if (p && p->val == _val) {
+        return p;
+    }
+    return nullptr;
+}
+
+template<class T>
+void  List<T>::remove(const T& _val) noexcept {
+    if (empty()) return;
     if (_first->val == _val) {
-        remove_first();
+        pop_front();
         return;
     }
     else if (_last->val == _val) {
-        remove_last();
+        pop_back();
         return;
     }
     Node<T>* slow = _first;
@@ -137,21 +200,11 @@ void  List<T>::remove(T _val) noexcept {
         slow = slow->next;
     }
     if (!fast) {
-        throw std::logic_error("This element does not exist");
+        return;
     }
     slow->next = fast->next;
     delete fast;
-}
-
-template<class T>
-Node<T>* List<T>::operator[] (const int index) {
-    if (is_empty()) return nullptr;
-    Node<T>* p = _first;
-    for (int i = 0; i < index; i++) {
-        p = p->next;
-        if (!p) return nullptr;
-    }
-    return p;
+    _size -= 1;
 }
 
 #endif LIB_LIST_LIST_H_

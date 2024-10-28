@@ -35,12 +35,17 @@ TEST(libQueue, isEmptytest) {
 	ASSERT_TRUE(test.isEmpty());
 }
 
+TEST(libQueue, isNotEmptytest) {
+	Queue<int> test;
+	test.push(5);
+
+	ASSERT_FALSE(test.isEmpty());
+}
+
 TEST(libQueue, poptest) {
 	Queue<int> test;
 
 	test.push(5);
-	ASSERT_FALSE(test.isEmpty());
-
 	test.pop();
 	ASSERT_TRUE(test.isEmpty());
 }

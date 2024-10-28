@@ -68,7 +68,6 @@ void Queue<T>::push(T val)
 	}
 		_top = (_top + 1) % _size;
 		_data[_top] = val;
-
 }
 
 template<class T>
@@ -78,10 +77,9 @@ void Queue<T>::pop()
 		throw std::logic_error("Queue is empty");
 	}
 	else {
-		//val = _data[_front];
 		if (_front == _top) {
-			_front = -1;
-			_top = -1;
+			_front = _front-1;
+			_top = _top-1;
 		}
 		else {
 			_front = (_front + 1) % _size;
