@@ -40,7 +40,7 @@ public:
     /* Функция удаления первого узла. */
     void pop_front() noexcept;
     /* Функция поиска узла в списке по заданному значению. */
-    Node<T>* find(const T& _val);
+    Node<T>* find(const T& _val) noexcept;
     /* Функция добавления элемента на позицию. */
     Node<T>* insert(int pos, const T& _val) noexcept;    
     /* Функция удаления узла по заданному значению. */
@@ -171,7 +171,7 @@ Node<T>* List<T>::insert(int pos, const T& _val) noexcept {
 }
 
 template<class T>
-Node<T>* List<T>::find(const T& _val) {
+Node<T>* List<T>::find(const T& _val) noexcept {
     Node<T>* p = _first;
     while (p && p->val != _val) {
         p = p->next;
