@@ -178,3 +178,23 @@ TEST(lib_list, remove) {
 	ASSERT_EQ(ints.front(), 43);
 	ASSERT_EQ(ints.size(), 1);
 }
+
+TEST(lib_test, erase) {
+	List<int> ints;
+	ints.push_back(42);
+	ints.push_back(43);
+	ints.push_back(44);
+	ints.push_back(45);
+
+	ints.erase(2);
+	ASSERT_EQ(ints.find(44), nullptr);
+	ASSERT_EQ(ints.size(), 3);
+
+	ints.erase(6);
+	ASSERT_EQ(ints.back(), 43);
+	ASSERT_EQ(ints.size(), 2);
+
+	ints.erase(0);
+	ASSERT_EQ(ints.front(), 43);
+	ASSERT_EQ(ints.size(), 1);
+}

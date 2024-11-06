@@ -40,11 +40,13 @@ public:
     /* Функция удаления первого узла. */
     void pop_front() noexcept;
     /* Функция поиска узла в списке по заданному значению. */
-    Node<T>* find(const T& _val) noexcept;
+    Node<T>* find(const T& _val) const noexcept;
     /* Функция добавления элемента на позицию. */
     Node<T>* insert(int pos, const T& _val) noexcept;    
     /* Функция удаления узла по заданному значению. */
     void remove(const T& _val) noexcept;
+    /* Функция удаления узла по позиции */
+    void erase(int pos) noexcept;
 };
 
 template<class T>
@@ -171,7 +173,7 @@ Node<T>* List<T>::insert(int pos, const T& _val) noexcept {
 }
 
 template<class T>
-Node<T>* List<T>::find(const T& _val) noexcept {
+Node<T>* List<T>::find(const T& _val) const noexcept {
     Node<T>* p = _first;
     while (p && p->val != _val) {
         p = p->next;
@@ -205,6 +207,34 @@ void  List<T>::remove(const T& _val) noexcept {
     slow->next = fast->next;
     delete fast;
     _size -= 1;
+}
+
+template<class T>
+void List<T>::erase(int pos) noexcept {
+    if (empty());
+    if (pos == 0) {
+        pop_front();
+    }
+    else {
+        if (pos > _size) {
+            pos = _size;
+        }
+        Node<T>* curr = _first;
+        Node<T>* currnext = _first->next;
+        for (int i = 1; i < pos; i++) {
+            curr = curr->next;
+            currnext = currnext->next;
+        }
+        if (currnext != nullptr) {
+            curr->next = currnext->next;
+            delete currnext;
+            _size -= 1;
+        }
+        else {
+            pop_back();
+        }
+    }
+    return;
 }
 
 #endif LIB_LIST_LIST_H_
