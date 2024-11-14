@@ -5,6 +5,7 @@
 
 #include <stdexcept>
 // Реализация узла.
+// Сделать поля метода приватными и сделать геторы, сеторы 
 template<class T>
 struct Node {
     T val;
@@ -20,6 +21,10 @@ class List {
     int _size;
 
 public:
+    class Iterator;
+    Iterator begin() { return Iterator(_first) };
+    Iterator end() { return Iterator(_last->next) };
+
     List();
     ~List();
     
@@ -28,8 +33,10 @@ public:
     /** Функция получения количества элементов в списке. */
     int size() noexcept;
     /* Функция получения значения первого элемента списка. */
+    // Добавить обработку исключений.
     T front();
     /* Функция получения значения последнего элемента списка. */
+    // Добавить обработку исключений.
     T back();
     /* Функция добавления элемента в конец списка. */
     void push_back(const T& _val) noexcept;
@@ -40,13 +47,41 @@ public:
     /* Функция удаления первого узла. */
     void pop_front() noexcept;
     /* Функция поиска узла в списке по заданному значению. */
+    // Добавить обработку исключений.
     Node<T>* find(const T& _val) const noexcept;
     /* Функция добавления элемента на позицию. */
+    // Добавить обработку исключений.
     Node<T>* insert(int pos, const T& _val) noexcept;    
     /* Функция удаления узла по заданному значению. */
+    // Добавить обработку исключений.
     void remove(const T& _val) noexcept;
     /* Функция удаления узла по позиции */
+    // Добавить обработку исключений.
     void erase(int pos) noexcept;
+    
+
+    class Iterator {
+        Node<T>* curr;
+    public:
+        Iterator(Node<T>* tmp):curr(tmp){}
+
+        Iterator& operator++(int){
+            assert(curr);
+            curr = curr->next;
+            return *this;
+        }
+        Iterator& operator++(){
+            assert(curr);
+            iterator it(curr);
+            curr = curr->next;
+            return it;
+        }
+
+        bool operator!=(const Iterator& it)const { return it.curr == this->curr; }
+        bool operator==(const Iterator& it)const { return it.curr != this->curr; }
+        int& operator* () { assert(curr); return curr->val; }
+        const int& operator*()const { assert(curr); return curr->val; }
+    };
 };
 
 template<class T>
