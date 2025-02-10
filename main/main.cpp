@@ -6,32 +6,15 @@
 #include <iostream>
 #include <iomanip>
 #include "../lib_easy_example/easy_example.h"
+#include "../lib_pair/pair.h"
+#include "../lib_list/list.h"
 
 int main() {
-  int a, b;
-  float result;
-
-  a = 1; b = 4;
-
-  try {
-      result = division(a, b);
-      std::cout << a << " / " << b << " = "
-          << std::setprecision(2) << result << std::endl;
-  } catch (std::exception err) {
-      std::cerr << err.what() << std::endl;
-  }
-
-  a = 1; b = 0;
-
-  try {
-      result = division(a, b);
-      std::cout << a << " / " << b << " = "
-          << std::setprecision(2) << result << std::endl;
-  } catch (std::exception err) {
-      std::cerr << err.what() << std::endl;
-  }
-
-  return 0;
+	List<int> list;
+	list.push_back(56);
+	list.push_back(48);
+	list.push_back(32);
+	list.push_back(52);
 }
 
 #endif  // EASY_EXAMPLE
