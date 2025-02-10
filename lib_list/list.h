@@ -26,6 +26,7 @@ public:
     Iterator end() { return Iterator(_last->next) };
 
     List();
+    List(const List& p);
     ~List();
     
     /* Функция проверки наличия узлов в списке. */
@@ -89,6 +90,13 @@ List<T>::List() {
     _first = nullptr;
     _last = nullptr;
     _size = 0;
+}
+
+template<class T>
+List<T>::List(const List& p) {
+    _first = p._first;
+    _last = p._last;
+    _size = p._size;
 }
 
 template<class T>
